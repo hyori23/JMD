@@ -154,11 +154,14 @@ const REGION_DATA = {
     caseStudy: {
       familyName: "광주이씨 광원군종가",
       location: "경기도 성남",
-      desc: "무를 제기 높이에 맞춰 정교한 '팔각 기둥' 모양으로 깎은 '침채'를 올립니다. 화려한 색감 대신 조형미로 정성을 표현한 사례입니다.",
-      img: "https://images.unsplash.com/photo-1516961642265-531546e84af2?q=80&w=1200&auto=format&fit=crop",
+      desc: "무를 제기 높이에 맞춰 정교한 '팔각 기둥' 모양으로 깎은 '침채'를 올립니다. 겨울에 동치미가 있을 때는 동치미 무를 팔각모양으로 잘라서 진설합니다. ",
+      img: "assets/jongga/gwangjuissi-gg.webp",
       foodName: "침채 (沈菜)",
+      foodImg: "assets/food/chimchae.webp",
+      hasSpecialDiagram: true,
+      diagramTitle: "진설도",
+      diagramCells: ["1열", "2열", "3열", "4열 (침채 위치)", "5열"],
     },
-    items: ["녹두전", "북어포", "다식", "육적"],
   },
   chungcheong: {
     id: "chungcheong",
@@ -175,11 +178,25 @@ const REGION_DATA = {
     caseStudy: {
       familyName: "수안이씨 요산군종가",
       location: "충청북도 보은",
-      desc: "양념을 전혀 하지 않고 하얗게 볶아낸 무나물을 고봉으로 쌓아 올립니다. 국수(면)를 주요 제물로 올려 곡물 중심의 문화를 보여줍니다.",
-      img: "https://images.unsplash.com/photo-1555964042-494da24b7a15?q=80&w=1200&auto=format&fit=crop",
-      foodName: "무나물 & 면",
+      desc: " 수안이씨 요산군종가의 제사상에는 일반적인 진설과는 다른 특이제물이 올라갑니다. 먼저 해적은 이름 그대로 낙지를 올리는 제물로, 첨작관이 술을 첨작할 때 제사상에 함께 진설됩니다. 어전은 바지락이나 굴을 주재료로 삼으며, 올해는 바지락을 사용하였습니다. 면은 찹쌀을 반죽해 동글납작하게 부친 뒤 돌돌 말아 약 5cm 너비로 썰어 만듭니다. 제기 하단에는 무를 깔아 높이를 맞춘 후, 그 위에 면을 세로로 꽂아 단정하게 진설합니다. 무나물은 무를 가늘게 채 썰어 프라이팬에 볶다가 무가 투명해질 때까지 익힌 뒤, 조갯살과 들기름, 조선간장, 마늘을 넣어 함께 볶아냅니다. 양념을 거의 하지 않고 하얗게 볶아낸 무나물을 고봉으로 쌓아 올려, 재료 본연의 색과 맛을 중시하는 종가 제물의 특징을 보여줍니다. ",
+      img: "assets/jongga/suanissi-c.webp",
+      foodName: "해적, 어전, 면, 무나물",
+      foodImg: [
+        "assets/food/octopus.webp",
+        "assets/food/eojeok.webp",
+        "assets/food/men.webp",
+        "assets/food/munamul.webp",
+      ],
+      hasSpecialDiagram: true,
+      diagramTitle: "진설도",
+      diagramCells: [
+        "1열(면 위치)",
+        "2열",
+        "3열(해적, 어전 위치)",
+        "4열 (무나물 위치)",
+        "5열",
+      ],
     },
-    items: ["해적(건어물 꼬치)", "면(국수)", "어전", "동부묵"],
   },
   gyeongsang: {
     id: "gyeongsang",
@@ -197,10 +214,13 @@ const REGION_DATA = {
       familyName: "풍산류씨 양진당종가",
       location: "경상북도 안동",
       desc: "닭을 봉황에 비유하여 '봉탕'이라 부릅니다. 닭 한 마리를 삶아 꼬리가 위를 향하게 세워 올리는 독특한 진설법을 가집니다.",
-      img: "https://images.unsplash.com/photo-1596459313837-123447195973?q=80&w=1200&auto=format&fit=crop",
-      foodName: "봉탕 (鳳湯)",
+      img: "assets/jongga/pungsallyussi-gs.webp",
+      foodName: "봉탕",
+      foodImg: "assets/food/bongtang.webp",
+      hasSpecialDiagram: true,
+      diagramTitle: "진설도",
+      diagramCells: ["1열", "2열 (봉탕 위치)", "3열", "4열", "5열"],
     },
-    items: ["통문어", "방어 꼬치", "계란지단 조기", "골탕"],
   },
   jeolla: {
     id: "jeolla",
@@ -218,10 +238,13 @@ const REGION_DATA = {
       familyName: "죽산박씨 송암종가",
       location: "전라남도 영암",
       desc: "보통 포(건어물)를 놓는 자리에 제철 꽃게를 통째로 쪄서 올리는 파격을 보여줍니다. 홍어 대신 가오리찜을 쓰기도 합니다.",
-      img: "https://images.unsplash.com/photo-1629016167822-19e486064024?q=80&w=1200&auto=format&fit=crop",
-      foodName: "꽃게찜 & 가오리",
+      img: "assets/jongga/juksanbakssi-j.webp",
+      foodName: "꽃게찜, 가오리찜",
+      foodImg: ["assets/food/fge.webp", "assets/food/gasami.webp"],
+      hasSpecialDiagram: true,
+      diagramTitle: "진설도",
+      diagramCells: ["1열", "2열 (꽃게찜, 가오리찜 위치)", "3열", "4열", "5열"],
     },
-    items: ["홍어회", "참꼬막", "낙지호롱", "수란"],
   },
 };
 
@@ -489,21 +512,7 @@ function setActiveRegion(id) {
                         data.desc
                       }</p>
 
-                      <!-- Data Insight Box -->
-                      <div class="mt-6 bg-white border border-[var(--color-paper-border)] p-5 rounded-lg flex gap-4 items-start shadow-sm">
-                          <div class="p-2 bg-gray-100 rounded-full text-gray-600">
-                              <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
-                          </div>
-                          <div>
-                              <h4 class="font-bold text-xs text-gray-500 uppercase mb-1">${
-                                data.insight.title
-                              }</h4>
-                              <p class="text-gray-800 text-sm font-medium leading-relaxed">${
-                                data.insight.content
-                              }</p>
-                          </div>
-                      </div>
-                  </header>
+
 
                   <!-- Case Study Section -->
                   <section class="space-y-8">
@@ -535,19 +544,70 @@ function setActiveRegion(id) {
 
                           <!-- 2. Unique Food Highlight -->
                           <div class="bg-white border border-[var(--color-paper-border)] rounded-xl p-8 shadow-xl">
-                              <div class="inline-block px-2 py-0.5 border border-gray-200 rounded-full text-xs font-bold text-gray-400 mb-1">UNIQUE ITEM</div>
-                              <h5 class="text-xl font-serif font-bold mb-2" style="color: ${
-                                data.color
-                              };">${data.caseStudy.foodName}</h5>
-
-                              <!-- Related Items Tags -->
-                              <div class="flex flex-wrap gap-1">
-                                  ${data.items
-                                    .map(
-                                      (item, i) =>
-                                        `<span class="px-2 py-0.5 bg-gray-50 text-gray-600 rounded-md text-xs border border-gray-100">#${item}</span>`
-                                    )
-                                    .join("")}
+                              <div class="flex flex-col gap-6 lg:flex-row ${
+                                Array.isArray(data.caseStudy.foodImg) ? "" : ""
+                              }">
+                                  <div class="${
+                                    Array.isArray(data.caseStudy.foodImg)
+                                      ? ""
+                                      : "flex-1"
+                                  }">
+                                      <h5 class="text-xl font-serif font-bold mb-2" style="color: ${
+                                        data.color
+                                      };">${data.caseStudy.foodName}</h5>
+                                      ${
+                                        Array.isArray(data.caseStudy.foodImg)
+                                          ? `<div class="grid ${
+                                              data.caseStudy.foodImg.length ===
+                                              2
+                                                ? "grid-cols-1"
+                                                : "grid-cols-2"
+                                            } gap-2">${data.caseStudy.foodImg
+                                              .map(
+                                                (img) =>
+                                                  `<img src="${img}" alt="${data.caseStudy.foodName}" class="w-40 h-40 object-contain rounded" />`
+                                              )
+                                              .join("")}</div>`
+                                          : `<img src="${data.caseStudy.foodImg}" alt="${data.caseStudy.foodName}" class="w-full h-64 object-contain rounded-lg mb-4" />`
+                                      }
+                                  </div>
+                                  ${
+                                    data.caseStudy.hasSpecialDiagram
+                                      ? `
+                                      <div class="${
+                                        Array.isArray(data.caseStudy.foodImg)
+                                          ? "flex-1"
+                                          : "flex-1"
+                                      } p-5 bg-[#F8F6F2] rounded-xl border border-dashed border-gray-300">
+                                          <div class="flex items-center gap-2 mb-3 text-[var(--color-${
+                                            data.id
+                                          })] font-bold text-sm">
+                                              ${data.caseStudy.diagramTitle}
+                                          </div>
+                                          <div class="diagram-grid flex flex-col">
+                                              ${data.caseStudy.diagramCells
+                                                .map(
+                                                  (cell, index) =>
+                                                    `<div class="diagram-cell" style="background-color: ${
+                                                      cell.includes("(") &&
+                                                      cell.includes(")")
+                                                        ? data.color
+                                                        : "white"
+                                                    }; text-align: center; height: 50px; line-height: 50px; margin-bottom: ${
+                                                      index <
+                                                      data.caseStudy
+                                                        .diagramCells.length -
+                                                        1
+                                                        ? "4px"
+                                                        : "0"
+                                                    };">${cell}</div>`
+                                                )
+                                                .join("")}
+                                          </div>
+                                      </div>
+                                  `
+                                      : ""
+                                  }
                               </div>
                           </div>
                       </div>
