@@ -5,6 +5,57 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   initApp();
 
+  // Parallax Effect
+  let mouseX = 0, mouseY = 0;
+  let currentX = 0, currentY = 0;
+  
+  document.addEventListener("mousemove", (e) => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  function animateParallax() {
+    currentX += (mouseX - currentX) * 0.05;
+    currentY += (mouseY - currentY) * 0.05;
+
+    // Apply parallax to intro section
+    const introSection = document.getElementById("intro");
+    if (introSection) {
+      introSection.style.transform = `translate(${currentX * 20}px, ${currentY * 20}px)`;
+    }
+
+    // Apply subtle parallax to jinseol items
+    document.querySelectorAll(".jinseol-item").forEach((item, index) => {
+      const speed = 0.5 + (index % 3) * 0.2;
+      item.style.transform = `translate(${currentX * speed * 5}px, ${currentY * speed * 5}px)`;
+    });
+
+    requestAnimationFrame(animateParallax);
+  }
+  animateParallax();
+
+  // Smooth Reveal on Scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -100px 0px"
+  };
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("fade-in-up");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe gallery items
+  setTimeout(() => {
+    document.querySelectorAll(".gallery-item").forEach(item => {
+      revealObserver.observe(item);
+    });
+  }, 100);
+
   // Modal drag functionality
   let isDragging = false;
   let dragStartX, dragStartY;
@@ -47,6 +98,12 @@ document.addEventListener("DOMContentLoaded", () => {
   window.stopDrag = () => {
     $currentModalContent = null;
   };
+
+  // Add floating animation to scroll indicator
+  const scrollIndicator = document.querySelector('[onclick="scrollToSection(\'basics\')"]');
+  if (scrollIndicator) {
+    scrollIndicator.classList.add("floating");
+  }
 });
 
 /* --- Data Definitions --- */
@@ -388,6 +445,39 @@ async function renderKoreaMap() {
   const svg = $koreaMapContainer.querySelector("svg");
   svg.classList.add("w-full", "h-full", "max-h-[70vh]", "drop-shadow-xl");
 
+  // Add gradient definitions to SVG
+  const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+  
+  const gradients = {
+    'gyeongsang': { color1: '#c25d4d', color2: '#d97565' },
+    'jeolla': { color1: '#d4a045', color2: '#e6b55d' },
+    'chungcheong': { color1: '#6a8d73', color2: '#82a58b' },
+    'gyeonggi': { color1: '#5b7c99', color2: '#7394b1' }
+  };
+
+  Object.entries(gradients).forEach(([region, colors]) => {
+    const gradient = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+    gradient.setAttribute("id", `gradient-${region}`);
+    gradient.setAttribute("x1", "0%");
+    gradient.setAttribute("y1", "0%");
+    gradient.setAttribute("x2", "100%");
+    gradient.setAttribute("y2", "100%");
+    
+    const stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+    stop1.setAttribute("offset", "0%");
+    stop1.setAttribute("style", `stop-color:${colors.color1};stop-opacity:1`);
+    
+    const stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+    stop2.setAttribute("offset", "100%");
+    stop2.setAttribute("style", `stop-color:${colors.color2};stop-opacity:1`);
+    
+    gradient.appendChild(stop1);
+    gradient.appendChild(stop2);
+    defs.appendChild(gradient);
+  });
+
+  svg.insertBefore(defs, svg.firstChild);
+
   // 지역별 텍스트 좌표
   const regionLabels = {
     gyeonggi: { x: 220, y: 220, text: "경기 · 강원" },
@@ -579,16 +669,17 @@ function renderDefaultMapState() {
  */
 function renderGallery() {
   $galleryGrid.innerHTML = GALLERY_ITEMS.map(
-    (item) => `
+    (item, index) => `
           <div
-              class="bg-white rounded-lg p-6 border border-gray-100 shadow-lg cursor-pointer hover:shadow-xl hover:scale-[1.01] transition-all flex flex-col items-center text-center gallery-item"
+              class="bg-white rounded-lg p-6 border border-gray-100 shadow-lg cursor-pointer hover:shadow-xl hover:scale-[1.01] transition-all flex flex-col items-center text-center gallery-item opacity-0"
               data-item-id="${item.id}"
+              style="animation-delay: ${index * 0.1}s"
           >
               <div class="text-xs font-bold text-gray-500 mb-4 w-full flex justify-between">
                   <span>${item.region}</span>
                   <span>#0${item.id}</span>
               </div>
-              <h4 class="text-xl font-serif font-bold mb-2">${item.name}</h4>
+              <h4 class="text-xl font-serif font-bold mb-2 gradient-text">${item.name}</h4>
               <p class="text-gray-500 text-sm line-clamp-2">${item.desc}</p>
 
               <div class="mt-4 flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-gray-700 transition-colors">
@@ -598,7 +689,30 @@ function renderGallery() {
       `
   ).join("");
 
-  document.querySelectorAll(".gallery-item").forEach((el) => {
+  document.querySelectorAll(".gallery-item").forEach((el, index) => {
+    // Add stagger animation
+    setTimeout(() => {
+      el.style.opacity = "1";
+      el.classList.add("fade-in-up");
+    }, index * 100);
+
+    // Add 3D tilt effect on hover
+    el.addEventListener("mousemove", (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (y - centerY) / 10;
+      const rotateY = (centerX - x) / 10;
+      
+      el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    });
+
+    el.addEventListener("mouseleave", () => {
+      el.style.transform = "perspective(1000px) rotateX(0) rotateY(0) scale(1)";
+    });
+
     el.addEventListener("click", (e) => {
       const id = parseInt(e.currentTarget.getAttribute("data-item-id"));
       const item = GALLERY_ITEMS.find((i) => i.id === id);

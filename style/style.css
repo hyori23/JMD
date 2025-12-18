@@ -20,15 +20,31 @@
   --color-paper-border: #eae6de;
 }
 
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Inter", "Noto Sans KR", sans-serif;
   color: #1a1917;
-  background-color: #f4f1ea;
+  background: linear-gradient(135deg, #f4f1ea 0%, #ebe7df 50%, #f4f1ea 100%);
+  background-attachment: fixed;
   transition: background-color 0.3s;
+  overflow-x: hidden;
 }
 
 .font-serif {
   font-family: "Nanum Myeongjo", serif;
+}
+
+/* Cursor Effects */
+body {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="4" fill="rgba(26, 25, 23, 0.3)"/></svg>'), auto;
+}
+
+button, a, .cursor-pointer {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="6" fill="rgba(26, 25, 23, 0.5)"/></svg>'), pointer;
 }
 
 /* =======================================
@@ -38,8 +54,16 @@ body {
   position: relative;
   z-index: 0;
   overflow: hidden;
-  background-color: #3e2723;
+  background: linear-gradient(135deg, #3e2723 0%, #4e342e 50%, #3e2723 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
 }
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 .wood-texture-bg::before {
   position: absolute;
   inset: 0;
@@ -48,6 +72,16 @@ body {
   content: "";
   background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
   opacity: 0.15;
+}
+
+.wood-texture-bg::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  content: "";
+  background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  opacity: 0.5;
 }
 
 /* 진설 행 */
@@ -61,12 +95,24 @@ body {
    ======================================= */
 .jinseol-row {
   opacity: 0;
-  transform: translateX(-50px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
+  transform: translateX(-50px) rotateY(-5deg);
+  transition: opacity 1s ease-out, transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 .jinseol-row.is-visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) rotateY(0);
+}
+
+.jinseol-row:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* =======================================
@@ -77,6 +123,12 @@ body {
   font-size: 0.85rem;
   color: #f5e6c8;
   text-align: center;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.jinseol-item:hover {
+  transform: translateY(-8px) scale(1.05);
+  filter: brightness(1.2);
 }
 
 .jinseol-item img {
@@ -87,33 +139,67 @@ body {
   -o-object-fit: contain;
      object-fit: contain;
   border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.jinseol-item:hover img {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(245, 230, 200, 0.2);
+  transform: scale(1.05);
 }
 
 /* =======================================
    4. 지도 파일 관련
    ======================================= */
+svg {
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.15));
+}
+
 svg .map-path {
   fill: #dcd6cc;
   stroke: #ffffff;
   stroke-width: 2;
-  transition: fill 0.3s ease, opacity 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
 }
+
 svg .map-path:hover {
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.9;
+  transform: scale(1.02);
+  filter: brightness(1.1) drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
 }
+
 svg .map-path.active-gyeongsang {
-  fill: #c25d4d;
+  fill: url(#gradient-gyeongsang);
+  animation: pulse 2s ease-in-out infinite;
 }
+
 svg .map-path.active-jeolla {
-  fill: #d4a045;
+  fill: url(#gradient-jeolla);
+  animation: pulse 2s ease-in-out infinite;
 }
+
 svg .map-path.active-chungcheong {
-  fill: #6a8d73;
+  fill: url(#gradient-chungcheong);
+  animation: pulse 2s ease-in-out infinite;
 }
+
 svg .map-path.active-gyeonggi {
-  fill: #5b7c99;
+  fill: url(#gradient-gyeonggi);
+  animation: pulse 2s ease-in-out infinite;
 }
+
+@keyframes pulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.15); }
+}
+
 svg .map-text {
   font-family: "Noto Sans KR", sans-serif;
   font-size: 24px;
@@ -122,14 +208,27 @@ svg .map-text {
   cursor: pointer;
   text-anchor: middle;
   fill: #1a1917;
-  transition: fill 0.3s ease;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
+
 svg .map-text:hover {
   fill: white;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+  transform: scale(1.1);
 }
+
 svg .map-text.active {
   fill: white;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+  animation: textGlow 2s ease-in-out infinite;
 }
+
+@keyframes textGlow {
+  0%, 100% { filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.3)); }
+  50% { filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.6)); }
+}
+
 svg .region-jeolla:hover {
   fill: #d4a045;
 }
@@ -149,4 +248,168 @@ svg .region-gyeonggi:hover {
 /* Tailwind 보완용 sticky offset */
 .lg\:sticky-top-16 {
   top: 4rem;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-wood-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Navbar Glassmorphism */
+#navbar {
+  background: rgba(244, 241, 234, 0.85) !important;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(234, 230, 222, 0.3);
+}
+
+/* Gallery Item Enhancements */
+.gallery-item {
+  background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transition: left 0.6s;
+}
+
+.gallery-item:hover::before {
+  left: 100%;
+}
+
+.gallery-item:hover {
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.15),
+    0 0 40px rgba(194, 93, 77, 0.1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--color-gyeongsang), var(--color-jeolla));
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--color-jeolla), var(--color-chungcheong));
+}
+
+/* Parallax Container */
+.parallax-container {
+  transition: transform 0.1s ease-out;
+}
+
+/* Button Hover Effects */
+button, .nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+button::before, .nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-gyeongsang), var(--color-jeolla));
+  transform: translateX(-50%);
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+button:hover::before, .nav-link:hover::before {
+  width: 100%;
+}
+
+/* Modal Animations */
+#gallery-modal {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
+#gallery-modal > div {
+  animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
