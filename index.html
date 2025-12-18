@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>제사상, 표준과 파격의 경계</title>
+    <link rel="stylesheet" href="./style/style.css" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts (Inter, Noto Sans KR, Nanum Myeongjo) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans+KR:wght@100..900&family=Nanum+Myeongjo:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav
+      id="navbar"
+      class="fixed top-0 left-0 right-0 z-50 bg-[var(--color-bg)]/95 backdrop-blur-md border-b border-[var(--color-paper-border)] h-16 flex items-center transition-all"
+    >
+      <div
+        class="max-w-screen-2xl w-full mx-auto px-6 flex justify-between items-center"
+      >
+        <div
+          class="font-serif font-bold text-xl cursor-pointer flex items-center gap-2"
+          onclick="scrollToSection('intro')"
+        >
+          <i
+            data-lucide="book-open"
+            class="w-5 h-5 text-[var(--color-dark)]"
+          ></i>
+          <span>K-RITES</span>
+        </div>
+
+        <div
+          class="hidden md:flex gap-8 text-sm font-medium text-gray-500"
+          id="nav-links"
+        >
+          <!-- Links rendered by JS -->
+        </div>
+        <div class="md:hidden">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 1. 인트로 부분 -->
+    <section
+      id="intro"
+      class="h-screen flex flex-col items-center justify-center text-center px-4 relative pt-16"
+    >
+      <div class="max-w-4xl space-y-6">
+        <div
+          class="inline-block px-4 py-1 border border-gray-400 rounded-full text-xs font-mono tracking-widest text-gray-500 mb-4"
+        >
+          KOREAN HERITAGE ARCHIVE
+        </div>
+        <h1
+          class="text-5xl md:text-7xl font-serif font-bold leading-tight break-keep text-[var(--color-dark)]"
+        >
+          지역별 제사상 비교<br />
+          아카이브
+        </h1>
+        <p
+          class="text-lg text-gray-600 font-light max-w-2xl mx-auto break-keep leading-relaxed"
+          id="intro-subtitle"
+        >
+          <!-- Subtitle rendered by JS -->
+        </p>
+        <div
+          onclick="scrollToSection('basics')"
+          class="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer flex flex-col items-center gap-2 group"
+        >
+          <span class="text-xs tracking-widest text-gray-400">SCROLL DOWN</span>
+          <i
+            data-lucide="chevron-down"
+            class="w-6 h-6 text-gray-400 group-hover:translate-y-1 transition-transform"
+          ></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 제사상 진설의 원칙 -->
+    <section
+      id="basics"
+      class="py-20 md:py-32 wood-texture-bg text-white relative"
+    >
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        <header class="text-center mb-16 md:mb-20">
+          <h2
+            class="text-amber-200/60 font-bold tracking-widest uppercase mb-4 text-sm"
+          >
+            THE STANDARD
+          </h2>
+          <h3 class="text-4xl md:text-5xl font-serif font-extrabold mb-6">
+            제사상 진설의 원칙
+          </h3>
+          <p class="text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            제사상은 신위(북쪽)를 기준으로 5열로 차리는 것이 기본이며,<br />모든
+            지역의 파격은 이 공통된 규칙 위에서 변주됩니다.
+          </p>
+        </header>
+        <!-- 신위 이미지 추가 -->
+        <div class="text-center mb-8">
+          <img
+            src="assets/jinseol/jinseol-01.webp"
+            alt="신위"
+            class="mx-auto max-w-xs rounded-lg shadow-lg"
+          />
+          <p class="text-white text-lg font-semibold mt-2">신위</p>
+        </div>
+        <div
+          id="jinseol-rows-container"
+          class="space-y-6 jinseol-row-container"
+        >
+          <!-- 여기 부분은 js로 해결쓰 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 지도 부분 -->
+    <section
+      id="map"
+      class="flex flex-col lg:flex-row min-h-screen border-b border-[var(--color-paper-border)] pt-16 lg:pt-0"
+    >
+      <!-- LEFT: Sticky Map -->
+      <div
+        class="lg:w-5/12 h-[50vh] lg:h-[calc(100vh-64px)] lg:sticky lg:top-16 bg-[var(--color-paper-border)]/70 backdrop-blur-sm border-b lg:border-b-0 lg:border-r border-[var(--color-paper-border)] z-10 flex flex-col"
+      >
+        <div class="p-6 lg:p-10 flex-shrink-0">
+          <h3 class="font-serif font-bold text-2xl">지역별 분포</h3>
+          <p class="text-sm text-gray-500 mt-1">
+            지도를 클릭하여 상세 정보를 확인하세요.
+          </p>
+        </div>
+        <div
+          class="flex-1 pb-10 flex items-center justify-center"
+          id="korea-map-container"
+        >
+          <!-- Map SVG는 자바코드로 -->
+        </div>
+      </div>
+
+      <!-- RIGHT: Scrollable Content -->
+      <div
+        class="lg:w-7/12 min-h-screen bg-[var(--color-bg)]"
+        id="region-detail-container"
+      >
+        <!-- Region Details or Default Message rendered by JS -->
+      </div>
+    </section>
+
+    <!-- 4. 특이제물 갤러리 부분 -->
+    <section id="gallery" class="py-20 bg-[var(--color-bg)]">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="mb-12 text-center">
+          <h2
+            class="text-sm font-bold tracking-widest uppercase text-gray-500 mb-4"
+          >
+            CURATED COLLECTION
+          </h2>
+          <h3 class="text-4xl font-serif font-bold">특이 제물 갤러리</h3>
+        </div>
+
+        <!-- 3-Column Grid Layout -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          id="gallery-grid"
+        >
+          <!-- Gallery Items rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 모달 뜨는거 -->
+    <div
+      id="gallery-modal"
+      class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/70 backdrop-blur-md"
+    >
+      <!-- Modal content rendered by JS -->
+    </div>
+
+    <script src="./js/app.js"></script>
+  </body>
+</html>
