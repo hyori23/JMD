@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap");
 *,
 *::before,
 *::after {
@@ -21,7 +22,7 @@
 }
 
 body {
-  font-family: "Inter", "Noto Sans KR", sans-serif;
+  font-family: "Gowun Batang", serif;
   color: #1a1917;
   background-color: #f4f1ea;
   transition: background-color 0.3s;
@@ -115,7 +116,7 @@ svg .map-path.active-gyeonggi {
   fill: #5b7c99;
 }
 svg .map-text {
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Gowun Batang";
   font-size: 24px;
   font-weight: bold;
   dominant-baseline: middle;

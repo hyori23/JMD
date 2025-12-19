@@ -252,36 +252,42 @@ const GALLERY_ITEMS = [
   {
     id: 1,
     name: "계란지단 조기",
+    image: "fisheg.webp",
     region: "경상",
-    desc: "조기를 굽지 않고 쪄서 계란 지단으로 감싸 올립니다. 경상도 일부 가문의 정성을 보여줍니다.",
+    desc: "조기를 굽지 않고 쪄서 계란 지단으로 감싸 올립니다.",
   },
   {
     id: 2,
     name: "가오리찜",
+    image: "gasami.webp",
     region: "전라",
     desc: "홍어와 비슷하지만 덜 삭힌 부드러운 맛으로, 전라도 잔칫상과 제사상에 빠지지 않습니다.",
   },
   {
     id: 3,
     name: "삽산적",
+    image: "sapsanjeok.webp",
     region: "충청",
     desc: "홍합, 두부, 고기를 꼬치에 꿰어 넓적하게 부친 충청도식 산적입니다.",
   },
   {
     id: 4,
     name: "낙지 호롱",
+    image: "fisheg.webp",
     region: "전라",
-    desc: "통낙지를 볏짚이나 나무젓가락에 돌돌 말아 양념을 발라 구워낸 요리입니다.",
+    desc: "낙지에 참기름으로 밑간을 한 뒤, 나무젓가락 끝에 머리를 끼우고 다리 부분을 풀리지 않고 돌돌 말아 마무리합니다.",
   },
   {
     id: 5,
     name: "돔배기",
+    image: "fisheg.webp",
     region: "경상",
     desc: "상어 고기를 토막 내어 소금에 절인 숙성회로, 경상도 내륙 제사상의 필수품입니다.",
   },
   {
     id: 6,
     name: "봉탕 (닭)",
+    image: "bongtang.webp",
     region: "경상",
     desc: "삶은 닭의 꼬리가 위를 향하게 세워 봉황의 형상을 본뜬 제물입니다.",
   },
@@ -541,6 +547,7 @@ function setActiveRegion(id) {
                                 data.caseStudy.desc
                               }</p>
                           </div>
+                          
 
                           <!-- 2. Unique Food Highlight -->
                           <div class="bg-white border border-[var(--color-paper-border)] rounded-xl p-8 shadow-xl">
@@ -640,14 +647,27 @@ function renderDefaultMapState() {
 function renderGallery() {
   $galleryGrid.innerHTML = GALLERY_ITEMS.map(
     (item) => `
+
           <div
-              class="bg-white rounded-lg p-6 border border-gray-100 shadow-lg cursor-pointer hover:shadow-xl hover:scale-[1.01] transition-all flex flex-col items-center text-center gallery-item"
+              class="bg-white rounded-lg p-6  shadow-lg cursor-pointer hover:shadow-xl hover:scale-[1.01] transition-all flex flex-col items-center text-center gallery-item"
               data-item-id="${item.id}"
           >
+
+
+
               <div class="text-xs font-bold text-gray-500 mb-4 w-full flex justify-between">
                   <span>${item.region}</span>
                   <span>#0${item.id}</span>
               </div>
+
+                            <!--  이미지 표시 -->
+              <img 
+                src="assets/food/${item.image}" 
+                alt="${item.name}" 
+                class="w-32 h-32 object-cover rounded mb-4 "
+                onerror="this.src='https://placehold.co/200x200/DDD/555?text=No+Image'"
+              />
+
               <h4 class="text-xl font-serif font-bold mb-2">${item.name}</h4>
               <p class="text-gray-500 text-sm line-clamp-2">${item.desc}</p>
 
@@ -655,9 +675,11 @@ function renderGallery() {
                   상세 보기 <i data-lucide="arrow-right" class="w-[10px] h-[10px]"></i>
               </div>
           </div>
+
       `
   ).join("");
 
+  // ⬇️ 기존 클릭 이벤트 리스너 유지
   document.querySelectorAll(".gallery-item").forEach((el) => {
     el.addEventListener("click", (e) => {
       const id = parseInt(e.currentTarget.getAttribute("data-item-id"));
@@ -666,17 +688,16 @@ function renderGallery() {
     });
   });
 
+  // lucide 아이콘 재렌더
   lucide.createIcons();
 }
-/**
- * 갤러리 모달 열기
- */
+// 모달 열기
 function showModal(item) {
   modalItem = item;
 
   $modal.innerHTML = `
     <div
-      class="bg-white rounded-xl p-8 max-w-lg w-full shadow-2xl relative"
+      class="bg-white rounded-xl p-6 max-w-lg w-full shadow-2xl relative flex flex-col items-center"
       onclick="event.stopPropagation()"
     >
       <button
@@ -692,22 +713,28 @@ function showModal(item) {
         </svg>
       </button>
 
-      <div class="text-center">
-        <div class="inline-block px-3 py-1 bg-gray-100 rounded-full text-xs font-bold text-gray-500 mb-4">
-          ${item.region}
-        </div>
-        <h3 class="text-2xl font-serif font-bold text-[var(--color-dark)] mb-3">
-          ${item.name}
-        </h3>
-        <p class="text-gray-600 leading-relaxed break-keep">
-          ${item.desc}
-        </p>
+      <!-- 이미지 중앙 표시 -->
+      <img 
+        src="assets/food/${item.image}" 
+        alt="${item.name}" 
+        class="w-full max-w-md max-h-64 object-contain rounded mb-4"
+        onerror="this.src='https://placehold.co/200x200/DDD/555?text=No+Image'"
+      />
+
+      <div class="inline-block px-3 py-1 bg-gray-100 rounded-full text-xs font-bold text-gray-500 mb-4">
+        ${item.region}
       </div>
+      <h3 class="text-2xl font-serif font-bold text-[var(--color-dark)] mb-3 text-center">
+        ${item.name}
+      </h3>
+      <p class="text-gray-600 leading-relaxed break-keep text-center">
+        ${item.desc}
+      </p>
     </div>
   `;
 
   $modal.classList.remove("hidden");
-  $modal.classList.add("flex");
+  $modal.classList.add("flex", "justify-center", "items-center");
 }
 
 /**
@@ -780,7 +807,7 @@ function setupNavbar() {
   const navItems = [
     { id: "intro", label: "홈" },
     { id: "basics", label: "진설 구조" },
-    { id: "map", label: "지역별 분포" },
+    { id: "map", label: "지역별 특징" },
     { id: "gallery", label: "특이 제물" },
   ];
 
