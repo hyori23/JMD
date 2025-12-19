@@ -156,7 +156,7 @@ const REGION_DATA = {
       location: "경기도 성남",
       desc: "무를 제기 높이에 맞춰 정교한 '팔각 기둥' 모양으로 깎은 '침채'를 올립니다. 겨울에 동치미가 있을 때는 동치미 무를 팔각모양으로 잘라서 진설합니다. ",
       img: "assets/jongga/gwangjuissi-gg.webp",
-      foodName: "침채 (沈菜)",
+      foodName: "침채 ",
       foodImg: "assets/food/chimchae.webp",
       hasSpecialDiagram: true,
       diagramTitle: "진설도",
@@ -521,8 +521,8 @@ function setActiveRegion(id) {
 
 
                   <!-- Case Study Section -->
-                  <section class="space-y-8">
-                      <div class="flex items-center justify-between border-b border-black pb-3">
+                  <section class="space-y-8 mt-12">
+                      <div class="flex items-center justify-between border-b border-black pb-3 mt-8">
                           <h3 class="text-xl font-bold font-serif">종가 사례 연구</h3>
                           <span class="text-xs bg-black text-white px-2 py-0.5 rounded-full">CASE STUDY</span>
                       </div>
@@ -540,7 +540,7 @@ function setActiveRegion(id) {
                                       }
                                   </div>
                               </div>
-                              <h4 class="text-2xl font-serif font-bold mb-2">${
+                              <h4 class="text-2xl font-serif font-bold mb-2 mt-7">${
                                 data.caseStudy.familyName
                               }</h4>
                               <p class="text-gray-600 leading-relaxed break-keep">${
@@ -550,7 +550,7 @@ function setActiveRegion(id) {
                           
 
                           <!-- 2. Unique Food Highlight -->
-                          <div class="bg-white border border-[var(--color-paper-border)] rounded-xl p-8 shadow-xl">
+                          <div class="bg-white border border-[var(--color-paper-border)] rounded-xl p-8 shadow-xl mt-12">
                               <div class="flex flex-col gap-6 lg:flex-row ${
                                 Array.isArray(data.caseStudy.foodImg) ? "" : ""
                               }">
