@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+p {
+  font-size: 16px;
+}
+
 h1 {
   line-height: 200%;
 }
