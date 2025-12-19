@@ -407,7 +407,7 @@ function renderJinseolRows() {
                       data-row-id="${row.id}"
                   >
                       <div class="w-full md:w-64 flex-shrink-0 text-center md:text-left space-y-2">
-                          <span class="text-amber-200/60 font-mono text-xs md:text-sm block">${row.label}</span>
+                          <span class="text-amber-200/60 font-gowun font-bold text-sm md:text-base block">${row.label}</span>
                           <span class="text-amber-200/60 font-mono text-xs md:text-sm block">${row.subLabel}</span>
                           <p class="text-white text-sm font-light leading-relaxed max-w-[250px] mx-auto md:mx-0">
                               ${row.desc}
