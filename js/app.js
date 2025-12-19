@@ -291,6 +291,27 @@ const GALLERY_ITEMS = [
     region: "경상",
     desc: "삶은 닭의 꼬리가 위를 향하게 세워 봉황의 형상을 본뜬 제물입니다.",
   },
+  {
+    id: 7,
+    name: "꽃게찜",
+    image: "fge.webp",
+    region: "전라",
+    desc: " 크기가 큰 꽃게 4마리를 사다가 찜솥에 쪄서 배를 위로 향하게 하여 제기에 올립니다.",
+  },
+  {
+    id: 8,
+    name: "침채",
+    image: "chimchae.webp",
+    region: "경기",
+    desc: "  무를 제기 크기에 맞춰 팔각기둥 모양으로 잘라 소금에 절여 두었다가 올립니다.",
+  },
+  {
+    id: 9,
+    name: "어전",
+    image: "eojeok.webp",
+    region: "충청",
+    desc: " 찹쌀·밀가루 반죽에 쪽파를 쫑쫑 썰어 넣은 다음, 프라이팬에 노릇노릇하게 부쳐냅니다. ",
+  },
 ];
 
 /* --- Global State --- */
