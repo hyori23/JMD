@@ -273,16 +273,16 @@ const GALLERY_ITEMS = [
   {
     id: 4,
     name: "낙지 호롱",
-    image: "fisheg.webp",
+    image: "octopus.webp",
     region: "전라",
     desc: "낙지에 참기름으로 밑간을 한 뒤, 나무젓가락 끝에 머리를 끼우고 다리 부분을 풀리지 않고 돌돌 말아 마무리합니다.",
   },
   {
     id: 5,
-    name: "돔배기",
-    image: "fisheg.webp",
-    region: "경상",
-    desc: "상어 고기를 토막 내어 소금에 절인 숙성회로, 경상도 내륙 제사상의 필수품입니다.",
+    name: "면",
+    image: "men.webp",
+    region: "충청",
+    desc: "면은 찹쌀을 반죽해 동글납작하게 부친 뒤 돌돌 말아 약 5cm 너비로 썰어 만듭니다.",
   },
   {
     id: 6,
